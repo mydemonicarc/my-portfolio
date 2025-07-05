@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}About - {{ data.name }}{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>About Me</h1>
+        <p>Get to know more about my background and skills</p>
+    </div>
+</section>
+
+<section class="about-content">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>My Story</h2>
+                <p>{{ data.bio }}</p>
+                <p>I'm passionate about creating innovative solutions and continuously learning new technologies. My journey in software development has been driven by curiosity and a desire to solve real-world problems through code.</p>
+                
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>{{ data.email }}</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>{{ data.phone }}</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ data.location }}</span>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="about-image">
+                <div class="profile-pic-large custom-image">
+                </div>
+            </div>
+                
+            
+        
+    </div>
+</section>
+
+<section class="skills-section">
+    <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid-detailed">
+            {% for skill in data.skills %}
+            <div class="skill-item-detailed">
+                <div class="skill-name">{{ skill }}</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: {{ range(70, 95) | random }}%"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="experience-section">
+    <div class="container">
+        <h2 class="section-title">What I Do</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Web Development</h3>
+                <p>Creating responsive and dynamic web applications using modern frameworks and technologies.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Development</h3>
+                <p>Building cross-platform mobile applications with intuitive user interfaces.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Backend Development</h3>
+                <p>Designing and implementing robust backend systems and APIs.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Data Analysis</h3>
+                <p>Analyzing data to derive insights and create data-driven solutions.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

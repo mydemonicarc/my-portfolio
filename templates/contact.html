@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - {{ data.name }}{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Get In Touch</h1>
+        <p>Let's discuss your next project or opportunity</p>
+    </div>
+</section>
+
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-info-section">
+                <h2>Contact Information</h2>
+                <p>I'm always open to discussing new opportunities, interesting projects, or potential collaborations.</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>{{ data.email }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>{{ data.phone }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>{{ data.location }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links-contact">
+                    <h3>Follow Me</h3>
+                    <div class="social-icons">
+                        <a href="{{ data.social_links.github }}" target="_blank" class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="{{ data.social_links.linkedin }}" target="_blank" class="social-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="{{ data.social_links.twitter }}" target="_blank" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-section">
+                <form class="contact-form" method="POST" id="contactForm">
+                    <h2>Send Me a Message</h2>
+                    
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-submit">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Sending...
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Form submission animation
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = contactForm.querySelector('.btn-submit');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+
+    contactForm.addEventListener('submit', function(e) {
+        // Show loading state
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline-block';
+        submitBtn.disabled = true;
+
+        // Form will submit normally, but we show loading for better UX
+        setTimeout(() => {
+            if (!contactForm.querySelector('.flash-message')) {
+                btnText.style.display = 'inline-block';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        }, 2000);
+    });
+
+    // Form validation and styling
+    const formInputs = contactForm.querySelectorAll('input, textarea');
+    
+    formInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (this.value === '') {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+        
+        input.addEventListener('input', function() {
+            if (this.value !== '') {
+                this.parentElement.classList.add('has-value');
+            } else {
+                this.parentElement.classList.remove('has-value');
+            }
+        });
+    });
+
+    // Auto-hide flash messages after 5 seconds
+    setTimeout(() => {
+        const flashMessages = document.querySelectorAll('.flash-message');
+        flashMessages.forEach(msg => {
+            msg.style.animation = 'fadeOut 0.5s ease forwards';
+            setTimeout(() => msg.remove(), 500);
+        });
+    }, 5000);
+</script>
+{% endblock %}

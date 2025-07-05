@@ -1,6 +1,6 @@
 Hello everyone!!
 
-This repository hosts two distinct Python projects: My personal portfolio and a travel agency website named "Travel Buddy".
+This repository hosts a Python project: My personal portfolio 
 
 ---
 
